@@ -1,0 +1,296 @@
+<form class="row g-3 needs-validation" id="ProductDetails" onsubmit="handleFormSubmit(this)">
+  <div id="message"></div>
+  <input type="text" id="codigo" name="codigo" value="" style="display: none">
+
+  <div class="row g-2" style="display: none">
+    <div class="col-md mb-3">
+      <div class="form-floating mb-3">
+        <input type="text" name="partidaPresupuestaria" id="partidaPresupuestaria" class="form-control"
+                                            placeholder="Partida presupuestaria">
+        <label for="floatingInput">Partida presupuestaria</label>
+        <div class="valid-feedback" id="mensaje-partidaPresupuestaria">
+          ¡Se ve bien!
+        </div>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-floating mb-3">
+        <input type="text" name="cpc" id="cpc" class="form-control" placeholder="CPC">
+        <label for="cpc">Código CPC</label>
+        <div class="valid-feedback" id="mensaje-cpc">
+          ¡Se ve bien!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-2" style="display: none">
+    <div class="col-md">
+      <div class="form-floating mb-3">
+        <textarea name="detalle" class="form-control" placeholder="Detalle del producto" id="detalle" style="height: 120px"></textarea>
+        <label for="detalle">Detalle del producto</label>
+      </div>
+    </div>
+    <div class="col-md mb-3">
+      <div class="form-floating mb-3">
+        <input type="text" name="tipoCompra" id="tipoCompra" class="form-control" placeholder="CPC">
+        <label for="tipoCompra">tipoCompra</label>
+      </div>
+    </div>
+  </div>
+
+    <div class="row g-2" style="display: none">
+    <div class="col-md">
+      <div class="form-floating mb-3">
+        <input type="text" name="subtotal" id="subtotal" class="form-control" placeholder="CPC">
+        <label for="subtotal">subtotal</label>
+        <div class="valid-feedback" id="mensaje-cpc">
+          ¡Se ve bien!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="etapaEvaluacion">
+    <h2>Etapa PREPARATORIA</h2>
+
+    <div class="mb-1 eval">
+      <label for="certificacionPresupuestaria" class="form-label">CERTIFICACIÓN PRESUPUESTARIA:</label>
+      <select id="certificacionPresupuestaria" name="certificacionPresupuestaria" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="necesidadContratacion" class="form-label">INFORME DE NECESIDAD DE CONTRATACIÓN:</label>
+      <select id="necesidadContratacion" name="necesidadContratacion" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="estudioDisenoProyecto" class="form-label">ESTUDIOS, DISEÑO O PROYECTOS:</label>
+      <select id="estudioDisenoProyecto" name="estudioDisenoProyecto" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="terminosReferencia" class="form-label">TÉRMINOS DE REFERENCIA O ESPECIFICACIONES TÉCNICAS:</label>
+      <select id="terminosReferencia" name="terminosReferencia" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="estudioMercado" class="form-label">ESTUDIO DE MERCADO:</label>
+      <select id="estudioMercado" name="estudioMercado" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="formularioContratacion" class="form-label">FORMULARIO DE CONTRATACIÓN:</label>
+      <select id="formularioContratacion" name="formularioContratacion" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="comentarioFasePreparatoria" class="form-label">COMENTARIO FASE PREPARATORIA:</label>
+      <textarea id="comentarioFasePreparatoria" name="comentarioFasePreparatoria" class="form-control form-control-sm" > </textarea>
+    </div>
+  </div>
+
+  <div class="etapaEvaluacion">
+    <h2>Etapa Pre Contractual</h2>
+
+    <div class="mb-1 eval">
+      <label for="certificacionPAC" class="form-label">CERTIFICACIÓN PAC:</label>
+      <select id="certificacionPAC" name="certificacionPAC" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="comentarioFasePreContractual" class="form-label">COMENTARIO FASE PRE CONTRACTUAL:</label>
+      <textarea id="comentarioFasePreContractual" name="comentarioFasePreContractual" class="form-control form-control-sm" > </textarea>
+    </div>
+
+  </div>
+
+  <div class="etapaEvaluacion">
+    <h2>Etapa Jurídica</h2>
+
+    <div class="mb-1 eval">
+      <label for="contratos" class="form-label">CONTRATOS:</label>
+      <select id="contratos" name="contratos" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="comisionTecnica" class="form-label">COMISIÓN TÉCNICA:</label>
+      <select id="comisionTecnica" name="comisionTecnica" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="comentarioFaseJuridico" class="form-label">COMENTARIO FASE JURÍDICAL:</label>
+      <textarea id="comentarioFaseJuridico" name="comentarioFaseJuridico" class="form-control form-control-sm"> </textarea>
+    </div>
+
+  </div>
+
+  <div class="etapaEvaluacion">
+    <h2>Etapa de Cierre</h2>
+
+    <div class="mb-1 eval">
+      <label for="actaEntregaRecepcion" class="form-label">ACTA ENTREGA RECEPCIÓN:</label>
+      <select id="actaEntregaRecepcion" name="actaEntregaRecepcion" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="pagoFinanciero" class="form-label">PAGO DE FINANCIERO:</label>
+      <select id="pagoFinanciero" name="pagoFinanciero" class="form-select form-select-sm" required>
+                  <option value="">--Seleccionar Tipo--</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="APROBADO">APROBADO</option>
+                  <option value="DOCUMENTO CARGADO">DOCUMENTO CARGADO</option>
+                  <option value="EN REVISION">EN REVISION</option>
+                  <option value="RECHAZADO">RECHAZADO</option>
+                  <option value="NO APLICA">NO APLICA</option>
+                </select>
+    </div>
+
+    <div class="mb-1 eval">
+      <label for="comentarioFaseCierre" class="form-label">COMENTARIO DE LA FASE DE CIERRE:</label>
+      <textarea id="comentarioFaseCierre" name="comentarioFaseCierre" class="form-control form-control-sm" > </textarea>
+    </div>
+
+  </div>
+
+  <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+
+<!--
+          <form id="ProductDetails" onsubmit="handleFormSubmit(this)">
+            <p class="h4 mb-4 text-center">Product Details</p>
+            <div id="message"></div>
+            <input type="text" id="recId" name="recId" value="" style="display: none">
+            <div class="mb-1">
+              <label for="name" class="form-label">Product Name:</label>
+              <input type="text" id="name" name="name" class="form-control form-control-sm" required>
+            </div>
+
+            <div class="mb-1">
+              <label for="description" class="form-label">Product Description:</label>
+              <textarea id="description" name="description" class="form-control form-control-sm" rows="2"></textarea>
+            </div>
+
+            <div class="mb-1">
+              <label for="category" class="form-label">Product Category:</label>
+              <select id="category" name="category" class="form-select form-select-sm" required>
+            <option value="">--Select a category--</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Home and Garden">Home and Garden</option>
+            <option value="Sports and Outdoors">Sports and Outdoors</option>
+          </select>
+            </div>
+
+            <div class="mb-1">
+              <div class="form-group col">
+                <label for="countryOfOrigin" class="form-label">Country</label>
+                <select class="form-select form-select-sm" id="countryOfOrigin" name="countryOfOrigin" required>
+          <option>--Select Country--</option>
+      </select>
+              </div>
+            </div>
+            <div class="mb-1">
+              <label class="form-label">Product Condition:</label><br>
+              <div class="form-check form-check-inline">
+                <input type="radio" id="new" name="condition" class="form-check-input" value="new" required>
+                <label for="new" class="form-check-label">New</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" id="used" name="condition" class="form-check-input" value="used" required>
+                <label for="used" class="form-check-label">Used</label>
+              </div>
+            </div>
+
+            <div class="mb-1">
+              <label for="price" class="form-label">Price:</label>
+              <input type="number" id="price" name="price" class="form-control" step="0.01" required>
+            </div>
+
+            <div class="mb-1">
+              <label for="quantity" class="form-label">Quantity:</label>
+              <input type="number" id="quantity" name="quantity" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>

@@ -1,0 +1,159 @@
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+<script>
+  // Prevent forms from submitting.
+  function preventFormSubmit() {
+    var forms = document.querySelectorAll('form');
+    for (var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener('submit', function(event) {
+      event.preventDefault();
+      });
+    }
+  }
+  window.addEventListener("load", functionInit, true); 
+  
+  //INITIALIZE FUNCTIONS ONLOAD
+  function functionInit(){
+    $('#spinnerModal').modal('show');  
+    preventFormSubmit();
+    getLastTenRows();
+    //createCountryDropdown();
+  };  
+
+//RETRIVE DATA FROM GOOGLE SHEET FOR COUNTRY DROPDOWN
+  function createCountryDropdown() {
+      google.script.run.withSuccessHandler(countryDropDown).getCountryList();
+  }
+  
+//POPULATE COUNTRY DROPDOWNS
+  function countryDropDown(values) { //Ref: https://stackoverflow.com/a/53771955/2391195
+    var list = document.getElementById('countryOfOrigin');   
+    for (var i = 0; i < values.length; i++) {
+      var option = document.createElement("option");
+      option.value = values[i];
+      option.text = values[i];
+      //list.appendChild(option);
+    }
+  }    
+  
+  //HANDLE FORM SUBMISSION
+  function handleFormSubmit(formObject) {
+    $('#spinnerModal').modal('show');
+    google.script.run.withSuccessHandler(createTable).processForm(formObject);
+    document.getElementById("ProductDetails").reset();
+  }
+  
+  function deleteRecord(el) {
+    var result = confirm("Seguro desea borrar el registro?");
+    if (result) {
+      $('#spinnerModal').modal('show');
+      var recordId = el.parentNode.parentNode.cells[2].innerHTML;
+      google.script.run.withSuccessHandler(createTable).deleteRecord(recordId);
+      document.getElementById("ProductDetails").reset();
+    }
+  }
+
+  
+  //GET LAST 10 ROWS
+  function getLastTenRows (){
+   google.script.run.withSuccessHandler(createTable).getLastTenRecords();
+  }
+
+  function editRecord(el){
+    $('#spinnerModal').modal('show');
+    let id = el.parentNode.parentNode.cells[2].innerHTML;
+    google.script.run.withSuccessHandler(populateForm).getRecordById(id);
+  }
+
+  function populateForm(data){
+    $('#spinnerModal').modal('hide');
+
+    document.getElementById('codigo').value = data[0][0];
+
+    document.getElementById('partidaPresupuestaria').value = data[0][1];
+    document.getElementById('cpc').value = data[0][2];
+    document.getElementById('tipoCompra').value = data[0][3];
+    document.getElementById('detalle').value = data[0][4];
+    document.getElementById('subtotal').value = data[0][5];
+    
+    document.getElementById('certificacionPresupuestaria').value = data[0][8];
+    document.getElementById('necesidadContratacion').value = data[0][9];
+    document.getElementById('estudioDisenoProyecto').value = data[0][10];
+    document.getElementById('terminosReferencia').value = data[0][11];
+    document.getElementById('estudioMercado').value = data[0][12];
+    document.getElementById('formularioContratacion').value = data[0][13];
+    document.getElementById('comentarioFasePreparatoria').value = data[0][14];
+
+    document.getElementById('certificacionPAC').value = data[0][16];
+    document.getElementById('comentarioFasePreContractual').value = data[0][17];
+
+    document.getElementById('contratos').value = data[0][19];
+    document.getElementById('comisionTecnica').value = data[0][20];
+    document.getElementById('comentarioFaseJuridico').value = data[0][21];
+
+    document.getElementById('actaEntregaRecepcion').value = data[0][23];
+    document.getElementById('pagoFinanciero').value = data[0][24];
+    document.getElementById('comentarioFaseCierre').value = data[0][25];
+
+    document.getElementById("message").innerHTML = "<div class='alert alert-warning' role='alert'>Actualizando archivo con ID: "+data[0][0]+"]</div>";
+  }
+
+  //CREATE THE DATA TABLE
+  function createTable(dataArray) {
+    $('#spinnerModal').modal('hide');
+  if (dataArray && dataArray.length) {
+    var result =
+      "<table class='table table-sm' style='font-size:0.8em'>" +
+      "<thead style='white-space: nowrap'>" +
+      "<tr>" +
+      "<th scope='col' style=`display: none`>Evaluar</th>" +
+      "<th scope='col' style='display:none;'>ID</th>" + // Hide the ID column header
+      "<th scope='col' style='display:none;'>Description</th>" +
+      "<th scope='col'>Estatus Preparatoria</th>" +
+      "<th scope='col'>Estatus Pre contractual</th>" +
+      "<th scope='col'>Estatus Jurídico</th>" +
+      "<th scope='col'>Estatus Cierre</th>" +
+      "<th scope='col'>Ult. actualizacion</th>" +
+      "</tr>" +
+      "</thead>";
+    for (var i = 0; i < dataArray.length; i++) {
+      result += "<tr>";
+      result +=
+        `<td style="display: none"><button type='button' class='btn btn-danger btn-custom deleteBtn' onclick='deleteRecord(this);'> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/></svg> </button></td>`;
+      result +=
+        `<td><button type='button' class='btn btn-warning btn-custom editBtn' onclick='editRecord(this);'> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                    </svg> </button></td>`;
+
+      result += "<td style='display:none;'>" + dataArray[i][0] + "</td>"; // Hide the ID column data
+      result += "<td>" + dataArray[i][7] + "</td>";
+      result += "<td>" + dataArray[i][15] + "</td>";
+      result += "<td>" + dataArray[i][18] + "</td>";
+      result += "<td>" + dataArray[i][22] + "</td>";
+      result += "<td>" + dataArray[i][26] + "</td>";
+      result += "</tr>";
+    }
+    result += "</table>";
+    var div = document.getElementById("dataTable");
+    div.innerHTML = result;
+    document.getElementById("message").innerHTML = "";
+  } else {
+    var div = document.getElementById("dataTable");
+    div.innerHTML = "No se han encontrado registros!";
+  }
+}
+
+//SEARCH RECORDS
+function handleSearchForm(formObject) {
+  $('#spinnerModal').modal('show');
+  google.script.run.withSuccessHandler(createTable).searchRecords(formObject);
+  document.getElementById("search-form").reset();
+}
+
+
+function getAllRecords(){
+    $('#spinnerModal').modal('show');
+    google.script.run.withSuccessHandler(createTable).getAllRecords();
+  }
+</script>
